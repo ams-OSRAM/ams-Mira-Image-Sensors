@@ -46,7 +46,7 @@ Install the tools and the kernel headers for the running kernel:
 
 ```bash
 sudo apt update
-sudo apt install -y git linux-headers-$(uname -r)
+sudo apt install -y git dkms device-tree-compiler linux-headers-$(uname -r)
 ```
 
 Then choose your sensor model:
@@ -54,13 +54,15 @@ Then choose your sensor model:
 - **Mira220**: [Linux Driver & Installation Guide](https://github.com/ams-OSRAM/mira220_v4l2_driver)
 - **Mira050 / Mira016**: [Linux Driver & Installation Guide](https://github.com/ams-OSRAM/mira050_016_v4l2_driver) (one driver for both sensors)
 
-Clone the driver repository and follow the steps in its README, for example:
+Clone the driver repository and follow the steps in its README. For example, for Mira050 / Mira016:
 
 ```bash
 cd ~
 git clone https://github.com/ams-OSRAM/mira050_016_v4l2_driver.git
 cd mira050_016_v4l2_driver
-make
+sudo ./dkms-install.sh     # driver, rebuilt automatically after kernel updates
+make dtbo
+sudo make install_dtbo     # device tree overlays
 ```
 
 > 💡 **Mira220**: Raspberry Pi OS already ships a Mira220 driver (kernel 6.12 and later), so `dtoverlay=mira220` works without building anything. Build the driver from [mira220_v4l2_driver](https://github.com/ams-OSRAM/mira220_v4l2_driver) only if you need a newer version than the one in your kernel.

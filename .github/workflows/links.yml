@@ -1,0 +1,27 @@
+name: Check links
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    - cron: "0 6 * * 1"   # every Monday, to catch links that break later
+  workflow_dispatch:
+
+jobs:
+  links:
+    runs-on: ubuntu-24.04
+    steps:
+      - uses: actions/checkout@v4
+      - name: Check links in the Markdown pages
+        uses: lycheeverse/lychee-action@v2
+        with:
+          fail: true
+          args: >-
+            --no-progress
+            --root-dir "${{ github.workspace }}"
+            --max-retries 3
+            --accept 200,206,429
+            --exclude "^https?://(www\.)?raspberrypi\.com"
+            --exclude "^https?://(www\.)?digikey\.com"
+            "./**/*.md"
