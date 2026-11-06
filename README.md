@@ -261,7 +261,7 @@ Follow the comprehensive [Software Setup Guide](/software/README.md) to:
 
 - **GitHub Repositories**:
   - [Mira220 V4L2 Driver](https://github.com/ams-OSRAM/mira220_v4l2_driver)
-  - [Mira016 V4L2 Driver](https://github.com/ams-OSRAM/mira016_v4l2_driver)
+  - [Mira050 / Mira016 V4L2 Driver](https://github.com/ams-OSRAM/mira050_016_v4l2_driver)
   - [Libcamera Fork](https://github.com/ams-OSRAM/libcamera)
 
 ---
