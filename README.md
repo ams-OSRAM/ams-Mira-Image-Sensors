@@ -315,7 +315,7 @@ Contact ams OSRAM directly through their official channels.
 
 - [Raspberry Pi Documentation](https://www.raspberrypi.com/documentation/)
 - [MIPI Alliance CSI-2 Specification](https://www.mipi.org/specifications/csi-2)
-- [V4L2 Linux Driver Framework](https://linuxtv.org/wiki/index.php/V4L2_drivers)
+- [V4L2 Linux Driver Framework](https://www.kernel.org/doc/html/latest/driver-api/media/index.html)
 
 ---
 
