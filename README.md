@@ -11,12 +11,12 @@
     <td align="center" width="50%">
       <h3>📷 Camera Boards</h3>
       <p>Hardware designs, schematics,<br>and assembly guides</p>
-      <a href="/camera_board/README.md"><strong>View Camera Boards →</strong></a>
+      <a href="camera_board/"><strong>View Camera Boards →</strong></a>
     </td>
     <td align="center" width="50%">
       <h3>💻 Software & Drivers</h3>
       <p>Installation guides, drivers,<br>and development tools</p>
-      <a href="/software/README.md"><strong>View Software Guide →</strong></a>
+      <a href="software/"><strong>View Software Guide →</strong></a>
     </td>
   </tr>
 </table>
@@ -64,7 +64,7 @@ The **Mira project** delivers open-source camera boards featuring the Mira famil
 - Tripod and all necessary cables
 - Ready to use out of the box
 
-Contact [ams OSRAM Sales](https://ams-osram.com) for evaluation kit information.
+Contact [ams OSRAM](https://ams-osram.com/support) for evaluation kit information.
 
 ### What is Mira?
 
@@ -139,7 +139,7 @@ Get a ready-to-use evaluation kit from **ams OSRAM** that includes:
 
 **Perfect for**: First-time users, rapid prototyping, demonstrations, and evaluation
 
-**Contact**: [ams OSRAM Sales](https://ams-osram.com) for evaluation kit availability and pricing
+**Contact**: [ams OSRAM](https://ams-osram.com/support) for evaluation kit availability and pricing
 
 **Option B: Camera Board Only**
 
@@ -178,7 +178,8 @@ Purchase individual camera boards from authorized distributors:
 | Component | Description | Link |
 |-----------|-------------|------|
 | **Mounting Screws** | DIN 7981, Stainless Steel A2, 2.2mm | [Online-Schrauben Shop](https://online-schrauben.de/shop/Schrauben/Blechschrauben/DIN-7981-Form-CH-Linsenkopf-Blechschrauben-mit-Phillips-Kreuzschlitz-und-Spitze-aehnl.-ISO-7049/Edelstahl-Rostfrei-A2/2,2-mm-Schraubendurchmesser) |
-| **Camera Cable** | Raspberry Pi CSI cable | [Adafruit 1648](https://www.mouser.at/ProductDetail/Adafruit/1648?qs=GURawfaeGuAYPzNMiqAbyQ%3D%3D) |
+| **Camera Cable** | Raspberry Pi CSI cable, 15-pin to 15-pin (Pi 3, Pi 4) | [Adafruit 1648](https://www.mouser.at/ProductDetail/Adafruit/1648?qs=GURawfaeGuAYPzNMiqAbyQ%3D%3D) |
+| **Camera Cable (Pi 5, Zero 2 W)** | These boards have the smaller 22-pin camera connector and need a 22-pin to 15-pin cable | [Raspberry Pi camera cables](https://www.raspberrypi.com/products/camera-cable/) |
 
 ### Step 4: Install Software
 
@@ -186,7 +187,7 @@ Follow the comprehensive [Software Setup Guide](/software/README.md) to:
 
 1. Install V4L2 kernel drivers
 2. Build and configure libcamera
-3. Install rpicam-apps utilities
+3. Rebuild rpicam-apps against it
 4. Set up Python bindings (optional)
 
 ---
@@ -249,13 +250,13 @@ Follow the comprehensive [Software Setup Guide](/software/README.md) to:
 ### Hardware Documentation
 
 - [Camera Board Designs](/camera_board/README.md) - Schematics, assembly guides, and PCB files
-- [Product Datasheets](#sensor-family) - Detailed specifications for each sensor
+- [Product Datasheets](#-sensor-family) - Detailed specifications for each sensor
 
 ### Software Documentation
 
 - [Software Setup Guide](/software/README.md) - Complete installation and configuration
 - [V4L2 Driver Documentation](https://www.kernel.org/doc/html/latest/userspace-api/media/v4l/v4l2.html)
-- [Libcamera Documentation](https://libcamera.org/docs.html)
+- [Libcamera Documentation](https://libcamera.org/docs/)
 
 ### Developer Resources
 
@@ -270,9 +271,8 @@ Follow the comprehensive [Software Setup Guide](/software/README.md) to:
 
 ### Getting Help
 
-- **📝 Issue Tracker**: Report bugs or request features on GitHub
-- **📧 Technical Support**: Contact ams OSRAM for hardware questions
-- **💬 Community Forums**: Connect with other Mira users
+- **📝 Issue Tracker**: Report bugs or request features on [GitHub](https://github.com/ams-OSRAM/ams-Mira-Image-Sensors/issues), or in the driver repository for your sensor
+- **📧 Technical Support**: Contact [ams OSRAM support](https://ams-osram.com/support) for hardware questions
 
 ### Contributing
 
@@ -322,7 +322,8 @@ Contact ams OSRAM directly through their official channels.
 ## 📰 News & Updates
 
 **Latest Updates**:
-- ✅ Mira220 driver now included in latest Raspberry Pi OS
+- ✅ Mira220 driver now included in the Raspberry Pi OS kernel (6.12 and later)
+- ✅ Mira050 and Mira016 now share one driver: [mira050_016_v4l2_driver](https://github.com/ams-OSRAM/mira050_016_v4l2_driver)
 - 🚀 New Python bindings for easier integration
 - 📦 Expanded distributor availability
 
@@ -333,7 +334,7 @@ Contact ams OSRAM directly through their official channels.
 The Mira project is made possible by:
 
 - **ams OSRAM** - Sensor design and manufacturing
-- **Raspberry Pi Foundation** - Platform support and community
+- **Raspberry Pi Ltd** - Platform support and community
 - **Open-source community** - Drivers, tools, and contributions
 
 ---
@@ -348,4 +349,4 @@ The Mira project is made possible by:
 
 ---
 
-*Last updated: March 2026*
+*Last updated: November 2026*

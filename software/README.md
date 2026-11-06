@@ -9,7 +9,7 @@
 Mira image sensors feature a standard **MIPI CSI-2 camera interface**, ensuring broad compatibility with various platforms:
 
 - **Single Board Computers**: Raspberry Pi, NXP i.MX
-- **Microprocessors**: Qualcomm, STM32
+- **Microprocessors**: Qualcomm, STM32MP
 - **Microcontrollers**: ESP32-P4
 
 This guide focuses on Raspberry Pi setup, though the V4L2 Linux driver is compatible with most Linux devices.
@@ -42,10 +42,28 @@ To operate a Mira camera board with your Raspberry Pi, you'll need:
 
 ### Step 2: Install the Kernel Module and Device Tree
 
-Choose your sensor model:
+Install the tools and the kernel headers for the running kernel:
+
+```bash
+sudo apt update
+sudo apt install -y git linux-headers-$(uname -r)
+```
+
+Then choose your sensor model:
 
 - **Mira220**: [Linux Driver & Installation Guide](https://github.com/ams-OSRAM/mira220_v4l2_driver)
 - **Mira050 / Mira016**: [Linux Driver & Installation Guide](https://github.com/ams-OSRAM/mira050_016_v4l2_driver) (one driver for both sensors)
+
+Clone the driver repository and follow the steps in its README, for example:
+
+```bash
+cd ~
+git clone https://github.com/ams-OSRAM/mira050_016_v4l2_driver.git
+cd mira050_016_v4l2_driver
+make
+```
+
+> 💡 **Mira220**: Raspberry Pi OS already ships a Mira220 driver (kernel 6.12 and later), so `dtoverlay=mira220` works without building anything. Build the driver from [mira220_v4l2_driver](https://github.com/ams-OSRAM/mira220_v4l2_driver) only if you need a newer version than the one in your kernel.
 
 
 ---
@@ -91,10 +109,31 @@ meson setup build --buildtype=release \
 # Compile and install
 ninja -C build
 sudo ninja -C build install
+sudo ldconfig
 ```
 
 ---
 
+### Step 4: Rebuild rpicam-apps
+
+The `rpicam-apps` that ship with Raspberry Pi OS are linked against the stock libcamera. Rebuild them so they use the Mira-enabled libcamera installed above.
+
+```bash
+# Install build dependencies
+sudo apt install -y libboost-program-options-dev libdrm-dev libexif-dev
+sudo apt install -y libjpeg-dev libpng-dev libepoxy-dev ninja-build
+
+# Clone, build and install
+cd ~
+git clone https://github.com/raspberrypi/rpicam-apps.git
+cd rpicam-apps
+meson setup build -Denable_libav=disabled -Denable_drm=enabled -Denable_egl=enabled   -Denable_qt=enabled -Denable_opencv=disabled -Denable_tflite=disabled -Denable_hailo=disabled
+meson compile -C build
+sudo meson install -C build
+sudo ldconfig
+```
+
+---
 
 #### Test Your Setup
 
@@ -114,7 +153,7 @@ To use your Mira camera with Python, install **picamera2** in a virtual environm
 
 ```bash
 cd ~
-python -m venv .venv --system-site-packages
+python3 -m venv .venv --system-site-packages
 source .venv/bin/activate
 ```
 
@@ -135,7 +174,8 @@ picam2.start()
 ### Camera Not Detected
 
 - Verify the ribbon cable is properly seated in both the camera and Raspberry Pi connectors
-- Check that the camera interface is enabled: `sudo raspi-config` → **Interface Options** → **Camera**
+- Check that `/boot/firmware/config.txt` contains the `dtoverlay=` line for your sensor, then reboot
+- List the cameras libcamera sees: `rpicam-hello --list-cameras`
 - Confirm the driver loaded correctly: `dmesg | grep mira`
 
 ### Build Errors
@@ -146,7 +186,6 @@ picam2.start()
 
 ### Python Import Errors
 
-- Verify the Python version in the symlink matches your system Python
 - Ensure the virtual environment has `--system-site-packages` enabled
 - Check libcamera installation: `ldconfig -p | grep libcamera`
 
@@ -155,7 +194,7 @@ picam2.start()
 ## Additional Resources
 
 - [Raspberry Pi Camera Documentation](https://www.raspberrypi.com/documentation/accessories/camera.html)
-- [Libcamera Documentation](https://libcamera.org/docs.html)
+- [Libcamera Documentation](https://libcamera.org/docs/)
 - [V4L2 Documentation](https://www.kernel.org/doc/html/latest/userspace-api/media/v4l/v4l2.html)
 
 ---
@@ -164,8 +203,8 @@ picam2.start()
 
 For issues specific to Mira sensors, please visit:
 - [ams-OSRAM GitHub Organization](https://github.com/ams-OSRAM)
-- Check the respective driver repository for your sensor model
+- The issue tracker of the driver repository for your sensor: [Mira220](https://github.com/ams-OSRAM/mira220_v4l2_driver/issues), [Mira050 / Mira016](https://github.com/ams-OSRAM/mira050_016_v4l2_driver/issues)
 
 ---
 
-*Last updated: March 2026*
+*Last updated: November 2026*

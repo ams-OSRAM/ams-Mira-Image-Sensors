@@ -93,7 +93,8 @@ To complete your camera setup, you'll need the following components:
 
 | Component | Description | Link |
 |-----------|-------------|------|
-| **Camera Cable** | Raspberry Pi CSI cable | [Adafruit 1648 @ Mouser](https://www.mouser.at/ProductDetail/Adafruit/1648?qs=GURawfaeGuAYPzNMiqAbyQ%3D%3D) |
+| **Camera Cable** | Raspberry Pi CSI cable, 15-pin to 15-pin (Pi 3, Pi 4) | [Adafruit 1648 @ Mouser](https://www.mouser.at/ProductDetail/Adafruit/1648?qs=GURawfaeGuAYPzNMiqAbyQ%3D%3D) |
+| **Camera Cable (Pi 5, Zero 2 W)** | 22-pin to 15-pin cable for the smaller camera connector | [Raspberry Pi camera cables](https://www.raspberrypi.com/products/camera-cable/) |
 
 ---
 
@@ -102,7 +103,7 @@ To complete your camera setup, you'll need the following components:
 ### Step 1: Prepare Components
 1. Gather all required accessories listed above
 2. Ensure you have a compatible Raspberry Pi board
-3. Verify the camera cable length is appropriate for your setup
+3. Verify the camera cable fits your Pi: Pi 5 and Zero 2 W need a 22-pin to 15-pin cable
 
 ### Step 2: Mount the Lens
 1. Attach the lens holder to the camera board using the mounting screws
@@ -115,7 +116,7 @@ To complete your camera setup, you'll need the following components:
 3. Ensure the cable is fully seated and the connector locks are engaged
 
 ### Step 4: Software Setup
-Refer to the [Software Guide](/software-guide.md) for driver and libcamera installation instructions.
+Refer to the [Software Guide](/software/README.md) for driver and libcamera installation instructions.
 
 ---
 
@@ -147,15 +148,14 @@ If you prefer to manufacture your own boards:
 
 For questions, issues, or suggestions:
 
-- 📝 **Open an issue** in the GitHub issue tracker
-- 📧 **Contact ams OSRAM** technical support
-- 💬 **Community forums** for user discussions
+- 📝 **Open an issue** in the [GitHub issue tracker](https://github.com/ams-OSRAM/ams-Mira-Image-Sensors/issues)
+- 📧 **Contact [ams OSRAM support](https://ams-osram.com/support)**
 
 ### Common Issues
 
 | Issue | Solution |
 |-------|----------|
-| Camera not detected | Check cable connection and CSI port enablement |
+| Camera not detected | Check the cable connection and the `dtoverlay=` line in `/boot/firmware/config.txt` |
 | Poor image quality | Verify lens is properly focused and clean |
 | GPIO not responding | Confirm pin configuration in device tree |
 
@@ -163,11 +163,11 @@ For questions, issues, or suggestions:
 
 ## 🔗 Related Resources
 
-- [Software Setup Guide](/software-guide.md)
+- [Software Setup Guide](/software/README.md)
 - [ams OSRAM GitHub Organization](https://github.com/ams-OSRAM)
 - [Raspberry Pi Camera Documentation](https://www.raspberrypi.com/documentation/accessories/camera.html)
 - [MIPI CSI-2 Specification](https://www.mipi.org/specifications/csi-2)
 
 ---
 
-*Last updated: March 2026*
+*Last updated: November 2026*
