@@ -147,6 +147,20 @@ If successful, you should see a live camera preview on your display.
 
 ---
 
+### Step 5: Install the Picam-web Viewer (optional)
+
+[Picam-web](https://github.com/phili-b/picam-web) is a camera viewer for evaluating sensors on a Raspberry Pi. It runs a web UI on the Pi, so you can view and control the camera from a browser on any PC on the same network: live preview, controls, sensor modes, raw/DNG downloads, histogram, ROIs and noise measurements. It also has an HTTP API and a Python API (`picam_client`).
+
+```bash
+sudo mkdir -p /opt/picam_viewer
+curl -fL https://github.com/phili-b/picam-web/releases/latest/download/picam-web.tar.gz | sudo tar -xz -C /opt/picam_viewer --strip-components=1
+sudo /opt/picam_viewer/install.sh
+```
+
+Then open `http://raspberrypi.local/` in a browser. See the [Picam-web README](https://github.com/phili-b/picam-web) for details.
+
+---
+
 ## Optional: Python Bindings (not needed)
 
 To use your Mira camera with Python, install **picamera2** in a virtual environment.

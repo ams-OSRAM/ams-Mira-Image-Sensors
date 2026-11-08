@@ -188,7 +188,8 @@ Follow the comprehensive [Software Setup Guide](/software/README.md) to:
 1. Install V4L2 kernel drivers
 2. Build and configure libcamera
 3. Rebuild rpicam-apps against it
-4. Set up Python bindings (optional)
+4. Install the Picam-web viewer (optional)
+5. Set up Python bindings (optional)
 
 ---
 
@@ -264,6 +265,7 @@ Follow the comprehensive [Software Setup Guide](/software/README.md) to:
   - [Mira220 V4L2 Driver](https://github.com/ams-OSRAM/mira220_v4l2_driver)
   - [Mira050 / Mira016 V4L2 Driver](https://github.com/ams-OSRAM/mira050_016_v4l2_driver)
   - [Libcamera Fork](https://github.com/ams-OSRAM/libcamera)
+  - [Picam-web](https://github.com/phili-b/picam-web) - Web viewer, HTTP and Python API
 
 ---
 
