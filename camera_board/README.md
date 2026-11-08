@@ -68,7 +68,13 @@ ams OSRAM offers **open-source reference designs** for Mira image sensors. You c
 
 ### Design Files
 
-> 💡 **Note**: Altium design files are available upon request. Contact ams OSRAM support for access.
+Each board folder contains the Altium project, a bill of materials, Gerber/manufacturing files and a 3D STEP model.
+
+| Model | Altium Project | BOM | Gerber / MFG | STEP |
+|-------|----------------|-----|--------------|------|
+| **Mira220** | [Mira220/](Mira220/) | [BOM](Mira220/Output/BOM/BOM-MIRA220CSP-ReferenceDesign.ods) | [MFG.7z](Mira220/Output/MFG/MFG.7z) | [STEP](Mira220/Output/ExportSTEP/MIRA220CSP.7z) |
+| **Mira050** | [Mira050/](Mira050/) | [BOM](Mira050/Output/BOM/Bill%20of%20Materials-MIRA050CSP-ReferenceDesign.xlsx) | [MFG.7z](Mira050/Output/MFG/MFG.7z) | [STEP](Mira050/Output/ExportSTEP/MIRA050CSP.7z) |
+| **Mira016** | [Mira016/](Mira016/) | [BOM](Mira016/Output/BOM/Bill%20of%20Materials-MIRA016-CSP.xlsx) | [MFG.7z](Mira016/Output/MFG/MFG.7z) | [STEP](Mira016/Output/ExportSTEP/MIRA016-CSP.7z) |
 
 ---
 
@@ -135,10 +141,9 @@ Contact authorized distributors for availability and pricing:
 
 If you prefer to manufacture your own boards:
 
-1. Download the schematics from the links above
-2. Request Altium design files from ams OSRAM support
+1. Download the design files from the [tables above](#-technical-documentation)
+2. Send the Gerber/manufacturing files to a PCB manufacturer of your choice
 3. Source components based on the Bill of Materials (BOM)
-4. Use a PCB manufacturer of your choice
 
 ---
 
@@ -157,7 +162,6 @@ For questions, issues, or suggestions:
 |-------|----------|
 | Camera not detected | Check the cable connection and the `dtoverlay=` line in `/boot/firmware/config.txt` |
 | Poor image quality | Verify lens is properly focused and clean |
-| GPIO not responding | Confirm pin configuration in device tree |
 
 ---
 

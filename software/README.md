@@ -67,6 +67,16 @@ sudo make install_dtbo     # device tree overlays
 
 > 💡 **Mira220**: Raspberry Pi OS already ships a Mira220 driver (kernel 6.12 and later), so `dtoverlay=mira220` works without building anything. Build the driver from [mira220_v4l2_driver](https://github.com/ams-OSRAM/mira220_v4l2_driver) only if you need a newer version than the one in your kernel.
 
+#### Enable the Overlay
+
+Add the overlay for your sensor to `/boot/firmware/config.txt` and reboot:
+
+```bash
+echo "dtoverlay=mira050" | sudo tee -a /boot/firmware/config.txt   # or mira016, mira220
+sudo reboot
+```
+
+Add `,cam0` (for example `dtoverlay=mira050,cam0`) if the camera is connected to the CAM0 port. See the driver README for the other overlay options.
 
 ---
 
@@ -81,7 +91,7 @@ Libcamera is the ISP framework that works alongside the V4L2 driver to process c
 sudo apt remove --purge libcamera-dev
 
 # Install build dependencies
-sudo apt install -y libboost-dev libgnutls28-dev openssl libtiff5-dev pybind11-dev
+sudo apt install -y libboost-dev libgnutls28-dev openssl libtiff-dev pybind11-dev
 sudo apt install -y qtbase5-dev libqt5core5a libqt5gui5 libqt5widgets5
 sudo apt install -y meson cmake python3-yaml python3-ply
 sudo apt install -y libglib2.0-dev libgstreamer-plugins-base1.0-dev
@@ -129,13 +139,11 @@ sudo apt install -y libjpeg-dev libpng-dev libepoxy-dev ninja-build
 cd ~
 git clone https://github.com/raspberrypi/rpicam-apps.git
 cd rpicam-apps
-meson setup build -Denable_libav=disabled -Denable_drm=enabled -Denable_egl=enabled   -Denable_qt=enabled -Denable_opencv=disabled -Denable_tflite=disabled -Denable_hailo=disabled
+meson setup build -Denable_libav=disabled -Denable_drm=enabled -Denable_egl=enabled -Denable_qt=enabled -Denable_opencv=disabled -Denable_tflite=disabled -Denable_hailo=disabled
 meson compile -C build
 sudo meson install -C build
 sudo ldconfig
 ```
-
----
 
 #### Test Your Setup
 
@@ -161,26 +169,24 @@ Then open `http://raspberrypi.local/` in a browser. See the [Picam-web README](h
 
 ---
 
-## Optional: Python Bindings (not needed)
+## Python
 
-To use your Mira camera with Python, install **picamera2** in a virtual environment.
-
-### Setup Virtual Environment
+[picamera2](https://github.com/raspberrypi/picamera2) comes with Raspberry Pi OS and works with the libcamera built above. If you use a virtual environment, create it with `--system-site-packages` so it can see picamera2 and libcamera:
 
 ```bash
-cd ~
-python3 -m venv .venv --system-site-packages
-source .venv/bin/activate
+python3 -m venv ~/.venv --system-site-packages
+source ~/.venv/bin/activate
 ```
 
-### Test Python Integration
+Capture an image:
 
 ```python
 from picamera2 import Picamera2
 
 picam2 = Picamera2()
-picam2.start_preview()
 picam2.start()
+picam2.capture_file("test.jpg")
+picam2.stop()
 ```
 
 ---

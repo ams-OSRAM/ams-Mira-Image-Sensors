@@ -143,15 +143,14 @@ Get a ready-to-use evaluation kit from **ams OSRAM** that includes:
 
 **Option B: Camera Board Only**
 
-Purchase individual camera boards from authorized distributors:
+Purchase individual camera boards from authorized distributors (search for "ams OSRAM Mira"):
 - [Digi-Key](https://www.digikey.com)
 - [Mouser Electronics](https://www.mouser.com)
 - [Farnell](https://www.farnell.com)
 - [Rutronik](https://www.rutronik.com)
 
 **Option C: Build Your Own**
-- Download [schematics and design files](/camera_board/README.md)
-- Request Altium files from ams OSRAM support
+- Download the [schematics, Altium projects, BOM and Gerber files](/camera_board/README.md#-technical-documentation)
 - Manufacture using your preferred PCB fabrication service
 
 ### Step 3: Get Required Accessories
@@ -189,7 +188,7 @@ Follow the comprehensive [Software Setup Guide](/software/README.md) to:
 2. Build and configure libcamera
 3. Rebuild rpicam-apps against it
 4. Install the Picam-web viewer (optional)
-5. Set up Python bindings (optional)
+5. Use the camera from Python with picamera2
 
 ---
 
@@ -206,12 +205,7 @@ Follow the comprehensive [Software Setup Guide](/software/README.md) to:
 | **Interface** | MIPI CSI-2 | MIPI CSI-2 | MIPI CSI-2 |
 | **NIR Sensitivity** | Enhanced | Enhanced | Enhanced |
 
-### Key Performance Characteristics
-
-- **Dynamic Range**: High dynamic range for challenging lighting conditions
-- **Frame Rate**: Variable, depending on resolution and configuration
-- **Power Consumption**: Optimized for battery-powered applications
-- **Operating Temperature**: Industrial temperature range support
+See the product pages linked under [Sensor Family](#-sensor-family) for frame rates, power and the full datasheets.
 
 ---
 
@@ -220,28 +214,28 @@ Follow the comprehensive [Software Setup Guide](/software/README.md) to:
 ### System Components
 
 ```
-┌─────────────────────────────────────────────────┐
-│                 Host System                      │
-│         (Raspberry Pi / Embedded Board)          │
-│                                                  │
-│  ┌────────────┐    ┌──────────────────────┐    │
-│  │ Application │───▶│    Libcamera ISP     │    │
-│  └────────────┘    └──────────┬───────────┘    │
-│                               │                  │
-│                    ┌──────────▼───────────┐     │
-│                    │   V4L2 Kernel Driver │     │
-│                    └──────────┬───────────┘     │
-└───────────────────────────────┼──────────────────┘
-                                │ MIPI CSI-2
-                    ┌───────────▼───────────┐
-                    │   Mira Camera Board   │
-                    │  ┌─────────────────┐  │
-                    │  │  Mira Sensor    │  │
-                    │  │  + Oscillator   │  │
-                    │  │  + LDO          │  │
-                    │  │  + Sequencer    │  │
-                    │  └─────────────────┘  │
-                    └───────────────────────┘
+┌──────────────────────────────────────────────┐
+│                 Host System                  │
+│        (Raspberry Pi / Embedded Board)       │
+│                                              │
+│  ┌─────────────┐    ┌──────────────────────┐ │
+│  │ Application │───▶│    Libcamera ISP     │ │
+│  └─────────────┘    └──────────┬───────────┘ │
+│                                │             │
+│                     ┌──────────▼───────────┐ │
+│                     │  V4L2 Kernel Driver  │ │
+│                     └──────────┬───────────┘ │
+└────────────────────────────────┼─────────────┘
+                                 │ MIPI CSI-2
+                     ┌───────────▼───────────┐
+                     │   Mira Camera Board   │
+                     │  ┌─────────────────┐  │
+                     │  │  Mira Sensor    │  │
+                     │  │  + Oscillator   │  │
+                     │  │  + LDO          │  │
+                     │  │  + Sequencer    │  │
+                     │  └─────────────────┘  │
+                     └───────────────────────┘
 ```
 
 ---
@@ -250,7 +244,7 @@ Follow the comprehensive [Software Setup Guide](/software/README.md) to:
 
 ### Hardware Documentation
 
-- [Camera Board Designs](/camera_board/README.md) - Schematics, assembly guides, and PCB files
+- [Camera Board Designs](/camera_board/README.md) - Schematics, Altium projects, BOM, Gerber and STEP files, assembly guide
 - [Product Datasheets](#-sensor-family) - Detailed specifications for each sensor
 
 ### Software Documentation
@@ -299,7 +293,7 @@ Contact ams OSRAM directly through their official channels.
 
 ## 📜 License
 
-- **Hardware**: Open-source design files (Altium files available on request)
+- **Hardware**: Open-source design files (Altium projects, BOM, Gerber and STEP files in [camera_board](/camera_board/))
 - **Software**: Check individual repository licenses for specific terms
 - **Documentation**: Available under permissive open-source license
 
@@ -326,8 +320,7 @@ Contact ams OSRAM directly through their official channels.
 **Latest Updates**:
 - ✅ Mira220 driver now included in the Raspberry Pi OS kernel (6.12 and later)
 - ✅ Mira050 and Mira016 now share one driver: [mira050_016_v4l2_driver](https://github.com/ams-OSRAM/mira050_016_v4l2_driver)
-- 🚀 New Python bindings for easier integration
-- 📦 Expanded distributor availability
+- ✅ [Picam-web](https://github.com/phili-b/picam-web): view and control the camera from a browser, with an HTTP and Python API
 
 ---
 
@@ -345,7 +338,7 @@ The Mira project is made possible by:
 
 **Ready to start your vision project?**
 
-[Get Camera Boards](/camera_board/README.md) • [Install Software](/software/README.md) • [View Examples](https://github.com/ams-OSRAM)
+[Get Camera Boards](/camera_board/README.md) • [Install Software](/software/README.md) • [Picam-web Examples](https://github.com/phili-b/picam-web/tree/main/examples)
 
 </div>
 
