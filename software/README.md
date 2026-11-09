@@ -38,6 +38,28 @@ To operate a Mira camera board with your Raspberry Pi, you'll need:
      - USB gadget mode (if needed)
 3. Insert the SD card and boot your Raspberry Pi
 
+#### Connect over USB (optional)
+
+With USB gadget mode, the Pi appears as a network adapter on your PC. It needs [rpi-usb-gadget](https://github.com/raspberrypi/rpi-usb-gadget) on the Pi. If you did not enable it in Imager, run `sudo rpi-usb-gadget on` and reboot.
+
+Keep the Pi in shared mode, so it always has the same address. Otherwise it can switch to client mode and lose the USB connection:
+
+```bash
+sudo systemctl disable --now rpi-usb-gadget-ics
+sudo reboot
+```
+
+Connect the PC to the USB-C port of a Pi 4 or Pi 5. The Pi is then at `10.12.194.1`, or `<hostname>.local`:
+
+```bash
+ssh <user>@10.12.194.1
+```
+
+On the PC:
+- Set the USB network adapter to automatic (DHCP), with Internet Connection Sharing off.
+- On Windows, install the Raspberry Pi RNDIS driver from the [rpi-usb-gadget releases](https://github.com/raspberrypi/rpi-usb-gadget/releases) if the adapter does not appear.
+- Turn off any VPN if the connection does not work.
+
 ---
 
 ### Step 2: Install the Kernel Module and Device Tree
